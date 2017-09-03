@@ -1,0 +1,21 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    httparty (0.15.6)
+      multi_xml (>= 0.5.2)
+    multi_xml (0.6.0)
+    prometheus-client (0.7.1)
+      quantile (~> 0.2.0)
+    quantile (0.2.0)
+    rack (2.0.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  httparty
+  prometheus-client
+  rack
+
+BUNDLED WITH
+   1.15.4
