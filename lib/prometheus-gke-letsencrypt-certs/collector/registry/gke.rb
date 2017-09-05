@@ -40,9 +40,15 @@ module PrometheusGKELetsEncryptCerts
           end
         end
 
-        def self.defunct_certificates(registry)
-          certificate_cache = certificates
+        def self.certificate_cache
+          @cache ||= certificates
+        end
 
+        def self.cache_clear
+          @cache = nil
+        end
+
+        def self.defunct_certificates(registry)
           registry.metrics.flat_map do |metric|
             next unless metric.name == :gke_letsencrypt_cert_expiration
 

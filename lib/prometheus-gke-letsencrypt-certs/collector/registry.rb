@@ -6,12 +6,13 @@ module PrometheusGKELetsEncryptCerts
       def self.update(registry, gauge)
         refresh_certificates(gauge)
         purge_defunct_certificates(registry, gauge)
+        GKE.cache_clear
 
         [ registry, gauge ]
       end
 
       def self.refresh_certificates(gauge)
-        GKE.certificates.each do |host|
+        GKE.certificate_cache.each do |host|
           gauge.set({ "certificate_name": host }, SSL.valid_until(host))
         end
       end

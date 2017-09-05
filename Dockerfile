@@ -79,4 +79,4 @@ ADD Gemfile /app/Gemfile
 
 RUN bundle install
 
-CMD [ "rackup" ]
+CMD [ "rackup", "-o0.0.0.0" ]
