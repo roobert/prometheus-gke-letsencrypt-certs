@@ -16,6 +16,9 @@ module PrometheusGKELetsEncryptCerts
         end
 
         def self.certificates
+          # NOTE: for testing
+          #return [ "test", "google.com" ]
+
           host = ENV["KUBERNETES_SERVICE_HOST"]
           port = ENV["KUBERNETES_PORT_443_TCP_PORT"]
           headers = { "Authorization" => "Bearer #{token}"}

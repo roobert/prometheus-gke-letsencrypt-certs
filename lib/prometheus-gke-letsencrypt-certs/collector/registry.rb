@@ -11,9 +11,29 @@ module PrometheusGKELetsEncryptCerts
         [ registry, gauge ]
       end
 
+      def self.lookup(host)
+        valid_until = -1
+
+        labels = {
+          certificate_name: host,
+          failure:          false,
+          error:            "",
+        }
+
+        begin
+          valid_until = SSL.valid_until(host)
+        rescue => e
+          labels[:failure] = true
+          labels[:error]   = e.to_s
+        end
+
+        [labels, valid_until]
+      end
+
       def self.refresh_certificates(gauge)
         GKE.certificate_cache.each do |host|
-          gauge.set({ "certificate_name": host }, SSL.valid_until(host))
+          labels, valid_until = lookup(host)
+          gauge.set(labels, valid_until)
         end
       end
 
