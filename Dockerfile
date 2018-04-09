@@ -1,6 +1,6 @@
 FROM google/cloud-sdk
 
-RUN apt-get update && apt-get install -y -qq --no-install-recommends curl build-essential git autoconf automake libtool zlib1g-dev libreadline-dev libssl-dev libcurl4-openssl-dev && apt-get clean
+RUN apt-get update && apt-get install -y -qq --no-install-recommends wget curl build-essential git autoconf automake libtool zlib1g-dev libreadline-dev libssl-dev libcurl4-openssl-dev && apt-get clean
 
 # skip installing gem documentation
 RUN mkdir -p /usr/local/etc \
